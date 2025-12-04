@@ -6,5 +6,6 @@ namespace Spotify.Core
         public required string Titulo {get;set;}
         public DateTime FechaLanzamiento {get;set;}
         public required Artista artista {get;set;}
+        public List<Cancion> canciones { get; set; } = new();
     }
 }

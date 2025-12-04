@@ -8,5 +8,7 @@ namespace Spotify.Core
         public required Album album {get;set;}
         public required Genero genero {get;set;}
         public required Artista artista {get;set;}
+        public uint AlbumId { get; set; }
+        public Album Album { get; set; }
     }
 }

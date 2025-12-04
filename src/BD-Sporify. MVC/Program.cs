@@ -22,6 +22,7 @@ builder.Services.AddScoped<IRepoCancionAsync, RepoCancionAsync>();
 builder.Services.AddScoped<IRepoNacionalidadAsync, RepoNacionalidadAsync>();
 builder.Services.AddScoped<IRepoUsuarioAsinc, RepoUsuarioAsync>();
 
+
 // 🔥 Agregar SESSION (Necesario para Login por Session)
 builder.Services.AddSession();
 

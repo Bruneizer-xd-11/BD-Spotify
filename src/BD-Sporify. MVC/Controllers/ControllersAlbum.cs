@@ -13,15 +13,18 @@ namespace SpotifyMVC.Controllers
         private readonly ILogger<AlbumController> _logger;
         private readonly IRepoArtistaAsync repoArtista;
         private readonly IRepoAlbumAsync repoAlbum;
+        private readonly IRepoCancionAsync repoCancion;
 
         public AlbumController(
             ILogger<AlbumController> logger,
             IRepoArtistaAsync repoArtista,
-            IRepoAlbumAsync repoAlbum)
+            IRepoAlbumAsync repoAlbum,
+            IRepoCancionAsync repoCancion)
         {
             _logger = logger;
             this.repoArtista = repoArtista;
             this.repoAlbum = repoAlbum;
+            this.repoCancion = repoCancion;
         }
 
         // GET: mostrar formulario
@@ -72,6 +75,8 @@ namespace SpotifyMVC.Controllers
     public async Task<IActionResult> DetalleAlbum(uint id){
         
         var album = await repoAlbum.DetalleDe(id);
+        var canciones = await repoCancion.ObtenerPorAlbum(id);
+        album.canciones = canciones.ToList();
 
         return View(album);
     }

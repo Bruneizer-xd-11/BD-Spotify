@@ -1,5 +1,6 @@
 @using Spotify.Core
 @model Album
+
 @{
     ViewData["Title"] = "DetalleAlbum";
 }
@@ -13,7 +14,21 @@
         <h2>Titulo del album: @Model.Titulo</h2>
         <p>Titulo: @Model.Titulo</p>
         <p>Fecha de Lanzamiento: @Model.FechaLanzamiento.ToString("dd/MM/yyyy")</p>
-        <p>Artista: @Model.artista.NombreArtistico</p>
+        <p>Artista: @Model.artista.NombreArtistico</p>       
+        <h3>Canciones</h3>
+@if (Model.canciones != null && Model.canciones.Any())
+{
+    <ul>
+        @foreach (var c in Model.canciones)
+        {
+            <li>@c.Titulo (@c.duration)</li>
+        }
+    </ul>
+}
+else
+{
+    <p>Este álbum no tiene canciones aún.</p>
+}
     </div>
 }
 else

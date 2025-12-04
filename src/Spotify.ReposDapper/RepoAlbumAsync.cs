@@ -60,4 +60,26 @@ public class RepoAlbumAsync : RepoGenerico, IRepoAlbumAsync
     {
         throw new NotImplementedException();
     }
+    public async Task<IEnumerable<Cancion>> ObtenerPorAlbum(uint idAlbum)
+{
+    string sql = @"
+        SELECT c.*, g.idGenero, g.Nombre AS NombreGenero
+        FROM Cancion c
+        JOIN Genero g ON c.idGenero = g.idGenero
+        WHERE c.idAlbum = @idAlbum";
+
+    var resultado = await _conexion.QueryAsync<Cancion, Genero, Cancion>(
+        sql,
+        (cancion, genero) =>
+        {
+            cancion.genero = genero;
+            return cancion;
+        },
+        new { idAlbum },
+        splitOn: "idGenero"
+    );
+
+    return resultado;
+}
+
 }
